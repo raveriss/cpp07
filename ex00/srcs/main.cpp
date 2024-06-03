@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     /**
      * Tester
      */
-    if (argc == 2 && strcmp(argv[1], "tester") == 0)
+    else if (argc == 2 && strcmp(argv[1], "tester") == 0)
     {
         // Test swap with integers
         int x = 1, y = 2;
@@ -119,13 +119,13 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    if (argc == 2 && strcmp(argv[1], "tester") != 0)
+    else if (argc == 2 && strcmp(argv[1], "tester") != 0)
     {
         std::cout << RED << "Usage: ./whatever or ./whatever [tester]" << NC << std::endl;
         return 1;
     }
 
-    if (argc > 2)
+    else if (argc > 2)
     {
         std::cout << RED << "Usage: ./whatever or ./whatever [tester]" << NC << std::endl;
         return 1;
