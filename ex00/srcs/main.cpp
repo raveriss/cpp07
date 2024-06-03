@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-
-
+#include <limits>
 #include <cstring>
 
 /* Inclure les fonctions de la classe Whatever */
@@ -34,36 +33,6 @@ std::string toString(const T& value)
     std::ostringstream oss;
     oss << value;
     return oss.str();
-}
-
-/**
- * @brief Teste la conversion d'une chaîne de caractères et compare le résultat attendu
- */
-void testConversion(const std::string& input, const std::string& expectedOutput)
-{
-    /* Création d'un objet ostringstream pour capturer la sortie */
-    std::ostringstream buffer;
-
-    /* Creation d'un pointeur rootCoutStream de type std::streambuf pour sauvegarder le tampon de flux courant de std::cout */
-    std::streambuf *rootCoutStream;
-
-    /* Sauvegarde du tampon de flux courant de std::cout */
-    rootCoutStream = std::cout.rdbuf();
-
-    /* Redirection de std::cout vers le tampon de flux buffer */
-    std::cout.rdbuf(buffer.rdbuf());
-
-    /* Print the expected and actual output */
-
-    
-    /* Restauration du tampon de flux d'origine de std::cout */
-    std::cout.rdbuf(rootCoutStream);
-
-    /* Capture the output in a string */
-    std::string output = buffer.str();
-
-    /* Print the expected and actual output */
-    ASSERT_TEST(output == expectedOutput, "Input: " + input + "\n" + output);
 }
 
 /**
@@ -118,6 +87,34 @@ int main(int argc, char *argv[])
 
         // Test max with strings
         ASSERT_TEST(::max(std::string("apple"), std::string("banana")) == "banana", "max(string): max('apple', 'banana') == 'banana'");
+
+        // Test min and max with INT_MIN and INT_MAX
+        ASSERT_TEST(::min(std::numeric_limits<int>::min(), std::numeric_limits<int>::max()) == std::numeric_limits<int>::min(), 
+                    "min(int): min(INT_MIN, INT_MAX) == INT_MIN");
+        ASSERT_TEST(::max(std::numeric_limits<int>::min(), std::numeric_limits<int>::max()) == std::numeric_limits<int>::max(), 
+                    "max(int): max(INT_MIN, INT_MAX) == INT_MAX");
+
+        // Test min and max with just below INT_MIN and just above INT_MAX using long long to avoid overflow
+        long long int min_below = static_cast<long long int>(std::numeric_limits<int>::min()) - 1;
+        long long int max_above = static_cast<long long int>(std::numeric_limits<int>::max()) + 1;
+        ASSERT_TEST(::min(min_below, max_above) == min_below, 
+                    "min(long long): min(INT_MIN-1, INT_MAX+1) == INT_MIN-1");
+        ASSERT_TEST(::max(min_below, max_above) == max_above, 
+                    "max(long long): max(INT_MIN-1, INT_MAX+1) == INT_MAX+1");
+
+        // Test min and max with float
+        ASSERT_TEST(::min(3.14f, 2.71f) == 2.71f, "min(float): min(3.14f, 2.71f) == 2.71f");
+        ASSERT_TEST(::max(3.14f, 2.71f) == 3.14f, "max(float): max(3.14f, 2.71f) == 3.14f");
+
+        // Test min and max with double
+        ASSERT_TEST(::min(3.141592653589793, 2.718281828459045) == 2.718281828459045, 
+                    "min(double): min(3.141592653589793, 2.718281828459045) == 2.718281828459045");
+        ASSERT_TEST(::max(3.141592653589793, 2.718281828459045) == 3.141592653589793, 
+                    "max(double): max(3.141592653589793, 2.718281828459045) == 3.141592653589793");
+
+        // Test min and max with -0.0 and +0.0
+        ASSERT_TEST(::min(-0.0, +0.0) == -0.0, "min(double): min(-0.0, +0.0) == -0.0");
+        ASSERT_TEST(::max(-0.0, +0.0) == +0.0, "max(double): max(-0.0, +0.0) == +0.0");
 
         return 0;
     }
