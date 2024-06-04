@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:33:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 02:57:48 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/04 03:03:57 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
 {
 	if (argc == 1)
 	{
+		std::cout << CYAN << "TEST MANDATORY PART" << NC << std::endl;
+		
 		int a = 2;
 		int b = 3;
 
@@ -79,6 +81,7 @@ int main(int argc, char *argv[])
 	 */
 	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
 	{
+		std::cout << CYAN << "TEST TESTER PART" << NC << std::endl;
 		std::cout << CYAN << "TEST WITH INTEGERS" << NC << std::endl;
 
 		/* Test swap with integers */
