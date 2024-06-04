@@ -6,19 +6,40 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:33:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 04:20:06 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:32:23 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-
-#include <string>
-#include <sstream>
-#include <limits>
-#include <cstring>
-
 /* Inclure les fonctions de la classe Whatever */
 #include "../incs/whatever.hpp"
+
+/* Inclusion de la bibliothèque standard pour std::cout */
+#include <iostream>
+
+/* Inclusion de la bibliothèque standard pour std::string */
+#include <string>
+
+/* Inclusion de la bibliothèque standard pour std::ostringstream */
+#include <sstream>
+
+/**
+ * @brief Inclusion de la bibliothèque standard pour std::numeric_limits
+ *        Utilisé pour obtenir les valeurs limites des types numériques.
+ */
+#include <limits>
+
+/**
+ * @brief Inclusion de la bibliothèque standard pour std::strcmp
+ *        Utilisé pour comparer des chaînes de caractères C-style.
+ */
+#include <cstring>
+
+/**
+ * @brief Inclusion de la bibliothèque standard pour std::isnan
+ *        Utilisé pour vérifier si une valeur est NaN (Not a Number).
+ */
+#include <cmath>
+
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
@@ -55,9 +76,9 @@ int main(int argc, char *argv[])
 {
 	if (argc == 1)
 	{
-		std::cout << MAGENTA << "\n/* ************************************************************************** */" << NC << std ::endl;
-		std::cout << MAGENTA << "/*                                 MANDATORY                                  */" << NC << std::endl;
-		std::cout << MAGENTA << "/* ************************************************************************** */" << NC << std ::endl;
+		std::cout << CYAN << "\n/* ************************************************************************** */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std::endl;
+		std::cout << CYAN << "/* ************************************************************************** */" << NC << std ::endl;
 		
 		int a = 2;
 		int b = 3;
@@ -83,15 +104,27 @@ int main(int argc, char *argv[])
 	 */
 	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
 	{
-		std::cout << MAGENTA << "\n/* ************************************************************************** */" << NC << std ::endl;
-		std::cout << MAGENTA << "/*                                 TESTER PART                                */" << NC << std::endl;
-		std::cout << MAGENTA << "/* ************************************************************************** */\n" << NC << std ::endl;
+		std::cout << CYAN << "\n/* ************************************************************************** */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                 TESTER PART                                */" << NC << std::endl;
+		std::cout << CYAN << "/* ************************************************************************** */\n" << NC << std ::endl;
 
-		std::cout << MAGENTA << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
-		std::cout << MAGENTA << "/*                                   INTEGERS                                 */" << NC << std ::endl;
-		std::cout << MAGENTA << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                    CHAR                                    */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 
-		std::cout << CYAN << "TEST WITH ORDINARY INTEGER" << NC << std::endl;
+		std::cout << MAGENTA << "TEST WITH CHAR" << NC << std::endl;
+
+		/* Test swap with integers */
+		int x1 = 'a', y1 = 'Z';
+		::swap(x1, y1);
+		ASSERT_TEST(x1 == 'Z' && y1 == 'a', "swap(int): x = " + std::string(1, static_cast<char>(x1)) + ", y = " + std::string(1, static_cast<char>(y1)));
+
+
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                   INTEGERS                                 */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+
+		std::cout << MAGENTA << "TEST WITH ORDINARY INTEGER" << NC << std::endl;
 
 		/* Test swap with integers */
 		int x = 1, y = 2;
@@ -105,7 +138,7 @@ int main(int argc, char *argv[])
 		ASSERT_TEST(::max(3, 4) == 4, "max(int): max(3, 4) == 4");
 
 		/* Test INT_MIN and INT_MAX */
-		std::cout << CYAN << "\nTEST WITH INT_MIN AND INT_MAX" << NC << std::endl;
+		std::cout << MAGENTA << "\nTEST WITH INT_MIN AND INT_MAX" << NC << std::endl;
 
 		/* Test swap INT_MIN and INT_MAX */
 		int int_min = std::numeric_limits<int>::min();
@@ -119,7 +152,7 @@ int main(int argc, char *argv[])
 		ASSERT_TEST(::max(std::numeric_limits<int>::min(), std::numeric_limits<int>::max()) == std::numeric_limits<int>::max(), 
 					"max(int): max(INT_MIN, INT_MAX) == INT_MAX");
 
-		std::cout << CYAN << "\nTEST WITH INT_MIN-1 AND INT_MAX+1" << NC << std::endl;
+		std::cout << MAGENTA << "\nTEST WITH INT_MIN-1 AND INT_MAX+1" << NC << std::endl;
 		/* Test min below INT_MIN and max above INT_MAX */
 		long long int min_below = static_cast<long long int>(std::numeric_limits<int>::min()) - 1;
 		long long int max_above = static_cast<long long int>(std::numeric_limits<int>::max()) + 1;
@@ -132,10 +165,18 @@ int main(int argc, char *argv[])
 		::swap(min_below, max_above);
 		ASSERT_TEST(min_below == static_cast<long long int>(std::numeric_limits<int>::max()) + 1 && max_above == static_cast<long long int>(std::numeric_limits<int>::min()) - 1, 
 					"swap(long long): min_below = " + toString(min_below) + ", max_above = " + toString(max_above));
+
+		long long large_pos = std::numeric_limits<long long>::max();
+		long long large_neg = std::numeric_limits<long long>::min();
+		::swap(large_pos, large_neg);
+		ASSERT_TEST(large_pos == std::numeric_limits<long long>::min() && large_neg == std::numeric_limits<long long>::max(), "swap(long long min, max): large_pos = min, large_neg = max");
+		::swap(large_pos, large_neg);
+		ASSERT_TEST(::min(large_pos, large_neg) == large_neg, "min(long long max, min) == min");		
+		ASSERT_TEST(::max(large_pos, large_neg) == large_pos, "max(long long max, min) == max");
 					
-		std::cout << MAGENTA << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
-		std::cout << MAGENTA << "/*                                    STRING                                  */" << NC << std ::endl;
-		std::cout << MAGENTA << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                    STRING                                  */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 		
 		/* Test swap with strings */
 		std::string str1 = "hello", str2 = "world";
@@ -148,9 +189,14 @@ int main(int argc, char *argv[])
 		/* Test max with strings */
 		ASSERT_TEST(::max(std::string("apple"), std::string("banana")) == "banana", "max(string): max('apple', 'banana') == 'banana'");
 
-		std::cout << MAGENTA << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
-		std::cout << MAGENTA << "/*                                    FLOATS                                  */" << NC << std ::endl;
-		std::cout << MAGENTA << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+		/* Test swap with equal strings */
+		std::string str3 = "equal", str4 = "equal";
+		::swap(str3, str4);
+		ASSERT_TEST(str3 == "equal" && str4 == "equal", "swap(string): str3 = " + str3 + ", str4 = " + str4);
+
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                   FLOATS                                   */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 		
 		/* Test swap with float min and max */
         float float_min = std::numeric_limits<float>::min();
@@ -176,9 +222,27 @@ int main(int argc, char *argv[])
         ASSERT_TEST(neg_zero == +0.01f && pos_zero == -0.01f, 
                     "swap(float): neg_zero = " + toString(neg_zero) + ", pos_zero = " + toString(pos_zero));
 
-		std::cout << MAGENTA << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
-		std::cout << MAGENTA << "/*                                    DOUBLE                                  */" << NC << std ::endl;
-		std::cout << MAGENTA << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+        /* Test swap with equal floats */
+        float float_equal_1 = 3.14f, float_equal_2 = 3.14f;
+        ::swap(float_equal_1, float_equal_2);
+        ASSERT_TEST(float_equal_1 == 3.14f && float_equal_2 == 3.14f, 
+                    "swap(float): float_equal_1 = " + toString(float_equal_1) + ", float_equal_2 = " + toString(float_equal_2));
+
+		float pos_zero_2 = +0.0f;
+		float neg_zero_2 = -0.0f;
+		::swap(pos_zero_2, neg_zero_2);
+		ASSERT_TEST(pos_zero_2 == -0.0f && neg_zero_2 == +0.0f, "swap(float +0.0, -0.0): pos_zero_2 = -0.0, neg_zero_2 = +0.0");
+		ASSERT_TEST(::min(pos_zero_2, neg_zero_2) == neg_zero_2, "min(float +0.0, -0.0) == -0.0");
+		ASSERT_TEST(::max(pos_zero_2, neg_zero_2) == pos_zero_2, "max(float +0.0, -0.0) == +0.0");
+
+		float nan1 = std::numeric_limits<float>::quiet_NaN();
+		float nan2 = std::numeric_limits<float>::quiet_NaN();
+		::swap(nan1, nan2);
+		ASSERT_TEST(std::isnan(nan1) && std::isnan(nan2), "swap(float NaN): nan1 and nan2 are NaN");
+
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                    DOUBLE                                  */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 		
 		/* Test swap with double min and max */
         double double_min = std::numeric_limits<double>::min();
@@ -200,9 +264,12 @@ int main(int argc, char *argv[])
         ASSERT_TEST(double_min_1 == std::numeric_limits<double>::max() + 1 && double_max_1 == std::numeric_limits<double>::min() - 1, 
                     "swap(double): double_min_1 = " + toString(double_min_1) + ", double_max_1 = " + toString(double_max_1));
 
-		// Test min and max with -0.0 and +0.0
-		ASSERT_TEST(::min(-0.01, +0.01) == -0.01, "min(double): min(-0.01, +0.01) == -0.01");
-		ASSERT_TEST(::max(-0.01, +0.01) == +0.01, "max(double): max(-0.01, +0.01) == +0.01");
+		/* Test swap with equal doubles */
+        double double_equal_1 = 3.141592653589793, double_equal_2 = 3.141592653589793;
+        ::swap(double_equal_1, double_equal_2);
+        ASSERT_TEST(double_equal_1 == 3.141592653589793 && double_equal_2 == 3.141592653589793, 
+                    "swap(double): double_equal_1 = " + toString(double_equal_1) + ", double_equal_2 = " + toString(double_equal_2));
+
 
 		return 0;
 	}
