@@ -6,11 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:33:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 02:25:25 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/04 02:51:16 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+
 #include <string>
 #include <sstream>
 #include <limits>
@@ -154,9 +155,9 @@ int main(int argc, char *argv[])
                     "swap(float): float_min_1 = " + toString(float_min_1) + ", float_max_1 = " + toString(float_max_1));
 
         /* Test swap with float -0.0 and +0.0 */
-        float neg_zero = -0.0f, pos_zero = +0.0f;
+        float neg_zero = -0.01f, pos_zero = +0.01f;
         ::swap(neg_zero, pos_zero);
-        ASSERT_TEST(neg_zero == +0.0f && pos_zero == -0.0f, 
+        ASSERT_TEST(neg_zero == +0.01f && pos_zero == -0.01f, 
                     "swap(float): neg_zero = " + toString(neg_zero) + ", pos_zero = " + toString(pos_zero));
 
 		std::cout << CYAN << "\nTEST WITH DOUBLES" << NC << std::endl;
@@ -188,7 +189,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	else if ((argc == 2 && strcmp(argv[1], "tester") != 0) || argc > 2)
+	else
 	{
 		std::cout << RED << "Usage: ./whatever or ./whatever tester" << NC << std::endl;
 		return 1;
