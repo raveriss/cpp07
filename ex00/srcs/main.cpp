@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:33:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 03:03:57 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/04 03:52:00 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ int main(int argc, char *argv[])
 {
 	if (argc == 1)
 	{
-		std::cout << CYAN << "TEST MANDATORY PART" << NC << std::endl;
+		std::cout << CYAN << "\n/* ************************************************************************** */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std::endl;
+		std::cout << CYAN << "/* ************************************************************************** */" << NC << std ::endl;
 		
 		int a = 2;
 		int b = 3;
@@ -81,8 +83,15 @@ int main(int argc, char *argv[])
 	 */
 	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
 	{
-		std::cout << CYAN << "TEST TESTER PART" << NC << std::endl;
-		std::cout << CYAN << "TEST WITH INTEGERS" << NC << std::endl;
+		std::cout << CYAN << "\n/* ************************************************************************** */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                 TESTER PART                                */" << NC << std::endl;
+		std::cout << CYAN << "/* ************************************************************************** */\n" << NC << std ::endl;
+
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                   INTEGERS                                 */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+
+		std::cout << CYAN << "TEST WITH ORDINARY INTEGER" << NC << std::endl;
 
 		/* Test swap with integers */
 		int x = 1, y = 2;
@@ -123,8 +132,10 @@ int main(int argc, char *argv[])
 		::swap(min_below, max_above);
 		ASSERT_TEST(min_below == static_cast<long long int>(std::numeric_limits<int>::max()) + 1 && max_above == static_cast<long long int>(std::numeric_limits<int>::min()) - 1, 
 					"swap(long long): min_below = " + toString(min_below) + ", max_above = " + toString(max_above));
-
-		std::cout << CYAN << "\nTEST WITH STRINGS" << NC << std::endl;
+					
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                    STRING                                  */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 		
 		/* Test swap with strings */
 		std::string str1 = "hello", str2 = "world";
@@ -137,8 +148,9 @@ int main(int argc, char *argv[])
 		/* Test max with strings */
 		ASSERT_TEST(::max(std::string("apple"), std::string("banana")) == "banana", "max(string): max('apple', 'banana') == 'banana'");
 
-		std::cout << CYAN << "\nTEST WITH FLOATS" << NC << std::endl;
-
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                    FLOATS                                  */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 		/* Test swap with float min and max */
         float float_min = std::numeric_limits<float>::min();
         float float_max = std::numeric_limits<float>::max();
@@ -163,8 +175,9 @@ int main(int argc, char *argv[])
         ASSERT_TEST(neg_zero == +0.01f && pos_zero == -0.01f, 
                     "swap(float): neg_zero = " + toString(neg_zero) + ", pos_zero = " + toString(pos_zero));
 
-		std::cout << CYAN << "\nTEST WITH DOUBLES" << NC << std::endl;
-		
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
+		std::cout << CYAN << "/*                                    DOUBLE                                  */" << NC << std ::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 		/* Test swap with double min and max */
         double double_min = std::numeric_limits<double>::min();
         double double_max = std::numeric_limits<double>::max();
