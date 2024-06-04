@@ -6,7 +6,7 @@
 #    By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 10:21:16 by raveriss          #+#    #+#              #
-#    Updated: 2024/06/04 21:51:09 by raveriss         ###   ########.fr        #
+#    Updated: 2024/06/04 22:15:56 by raveriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ SRC_DIR = srcs
 OBJ_DIR = obj
 INC_DIR = incs
 
-# Compiler and flags
+# Compiler
 CXX = c++
+
+# The -MMD flag generates dependencies
 CXXFLAGS = -Wall -Wextra -Werror -Wconversion -std=c++98 -MMD -I$(INC_DIR)
 
 # Source files and objects
@@ -38,6 +40,7 @@ CURRENT_FILE = 0
 # Main targets
 all: $(NAME)
 
+# Rule to compile the program
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) -o $@ $^
 	@echo ""
@@ -69,18 +72,18 @@ define reset_progress
 	@$(eval TOTAL_FILES=$(1))
 endef
 
+# Clean the object files and dependencies
 clean:
 	@echo "Cleaning..."
 	@$(foreach obj,$(OBJS) $(DEPS),rm -f $(obj);)
 	@rm -rf obj 
 	@echo "Objects and dependencies cleaned."
 
-
+# Clean everything
 fclean: clean
 	@echo "Removing $(NAME)..."
 	@rm -f $(NAME)
 	@echo "$(NAME) removed."
-
 
 # Rebuild everything
 re: fclean all
