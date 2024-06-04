@@ -5,34 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 14:00:00 by raveriss          #+#    #+#             */
-/*   Updated: 2024/05/31 13:52:19 by raveriss         ###   ########.fr       */
+/*   Created: 2024/06/04 20:11:22 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/04 21:07:04 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* Inclusion du fichier d'en-tête de la classe ScalarConverter */
-#include "../incs/ScalarConverter.hpp"
 
 /* Inclusion de la bibliothèque standard pour l'utilisation de flux d'entrée/sortie standard */
 #include <iostream>
 
-/* Inclusion de la bibliothèque standard pour std::ostringstream */
-#include <sstream>
-
-/* Inclusion de la bibliothèque standard pour std::string */
-#include <cstring>
-
-/* Inclusion de la bibliothèque standard pour pour INT_MIN, INT_MAX */
-#include <climits>
-
-/* Inclusion de la bibliothèque standard pour les limites des types flottants */
-#include <cfloat>
-
-/* Inclusion de la bibliothèque standard pour obtenir les limites des types numériques */
 #include <limits>
 
-/* Inclusion de la bibliothèque standard pour std::fixed, std::setprecision */
-#include <iomanip>
+/* Inclusion du fichier d'en-tête de la fonction template iter */
+#include "iter.hpp"
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
@@ -44,164 +28,191 @@
 #define CYAN        "\033[0;36m"
 #define NC          "\033[0m"
 
-/**
- *  @brief Macro for asserting test results and displaying appropriate messages
- */
+/* Macro for asserting test results and displaying appropriate messages */
 #define ASSERT_TEST(expression, message) \
-	if (expression) { std::cout << "\033[32m[TEST PASSED]\033[0m " << message << std::endl; } \
-	else { std::cout << "\033[31m[TEST FAILED]\033[0m " << message << std::endl; }
+    if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
+    else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
-/**
- * @brief Teste la conversion d'une chaîne de caractères et compare le résultat attendu
- */
-void testConversion(const std::string& input, const std::string& expectedOutput) {
-    std::ostringstream buffer;
-    std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-    
-    ScalarConverter::convert(input);
-    
-    std::cout.rdbuf(old);
-    std::string output = buffer.str();
-    ASSERT_TEST(output == expectedOutput, "Input: " + input + "\n" + output);
+/* Template function to print an element */
+template <typename T>
+void printElement(T &element) {
+    std::cout << element << std::endl;
 }
 
-/**
- * @brief Converts a numeric value to a string using std::ostringstream
- */
-template<typename T>
-std::string toString(T value) {
-    std::ostringstream oss;
-    oss << value;
-    return oss.str();
+/* Template function to increment an element */
+template <typename T>
+void increment(T &element) {
+    ++element;
 }
 
-/**
- * @brief Specialization of toString for float type
- */
-template<>
-std::string toString<float>(float value) {
-    std::ostringstream oss;
-    oss << std::fixed << std::setprecision(1) << value;
-    return oss.str();
-}
-
-/**
- * @brief Specialization of toString for double type
- */
-template<>
-std::string toString<double>(double value) {
-    std::ostringstream oss;
-    oss << std::fixed << std::setprecision(1) << value;
-    return oss.str();
-}
-
-/**
- *  @brief Point d'entrée principal du programme
- */
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " <literal>\n";
-        return 1;
+/* Template function to test iter function */
+template <typename T>
+void testIter(T *array, int length, void (*func)(T &), T *expectedArray) {
+    iter(array, length, func);
+    bool passed = true;
+    for (int i = 0; i < length; ++i) {
+        if (array[i] != expectedArray[i]) {
+            passed = false;
+            break;
+        }
     }
+    ASSERT_TEST(passed, "iter function works correctly.");
+}
+
+/* Main entry point of the program */
+int main() {
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+    std::cout << CYAN << "/*                                    CHAR                                    */" << NC << std::endl;
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+
+    std::cout << MAGENTA << "TEST WITH CHAR" << NC << std::endl;
+
+    /* Test iter with characters */
+    char charArray[] = {'a', 'b', 'c', 'd', 'e'};
+    char charArrayExpected[] = {'b', 'c', 'd', 'e', 'f'};
+    testIter(charArray, 5, increment, charArrayExpected);
+
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+    std::cout << CYAN << "/*                                   INTEGERS                                 */" << NC << std::endl;
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+
+    std::cout << MAGENTA << "TEST WITH ORDINARY INTEGER" << NC << std::endl;
+
+    int intArray[] = {0, 1, 2, 3, 4};
+    int intArrayIncremented[] = {1, 2, 3, 4, 5};
+    testIter(intArray, 5, increment, intArrayIncremented);
+
+    std::cout << MAGENTA << "TEST WITH INT MAX" << NC << std::endl;
+
+    long long int intMax = std::numeric_limits<int>::max();
+    long long int intMaxIncremented = intMax + 1;
+    long long int intArrayMax[] = {intMax};
+    long long int intArrayMaxExpected[] = {intMaxIncremented};
+    testIter(intArrayMax, 1, increment, intArrayMaxExpected);
+
+    std::cout << MAGENTA << "TEST WITH INT MIN" << NC << std::endl;
+
+    long long int intMin = std::numeric_limits<int>::min();
+    long long int intMinIncremented = intMin + 1;
+    long long int intArrayMin[] = {intMin};
+    long long int intArrayMinExpected[] = {intMinIncremented};
+    testIter(intArrayMin, 1, increment, intArrayMinExpected);
+
+    std::cout << MAGENTA << "TEST WITH INT MAX + 1" << NC << std::endl;
+
+    long long int intMaxPlusOne = static_cast<long long>(std::numeric_limits<int>::max()) + 1;
+    long long int intMaxPlusOneIncremented = intMaxPlusOne + 1;
+    long long int intArrayMaxPlusOne[] = {intMaxPlusOne};
+    long long int intArrayMaxPlusOneExpected[] = {intMaxPlusOneIncremented};
+    testIter(intArrayMaxPlusOne, 1, increment, intArrayMaxPlusOneExpected);
+
+    std::cout << MAGENTA << "TEST WITH INT MIN - 1" << NC << std::endl;
+
+    long long int intMinMinusOne = static_cast<long long>(std::numeric_limits<int>::min()) - 1;
+    long long int intMinMinusOneIncremented = intMinMinusOne + 1;
+    long long int intArrayMinMinusOne[] = {intMinMinusOne};
+    long long int intArrayMinMinusOneExpected[] = {intMinMinusOneIncremented};
+    testIter(intArrayMinMinusOne, 1, increment, intArrayMinMinusOneExpected);
+
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+    std::cout << CYAN << "/*                                    FLOAT                                   */" << NC << std::endl;
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
     
-    /**
-     * Tester
-     */
-    if (strcmp(argv[1], "tester") == 0)
-    {
-        /**
-         * MANDATORY TESTS
-         */
-        std::cout << std::endl << CYAN << "MANDATORY TESTS:" << NC << std::endl;
-
-        testConversion("0", "char: Non displayable\nint: 0\nfloat: 0.0f\ndouble: 0.0\n");
-        testConversion("nan", "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan\n");
-        testConversion("42.0f", "char: '*'\nint: 42\nfloat: 42.0f\ndouble: 42.0\n");
-
-        /**
-         * ADDITIONAL TESTS
-         */
-        std::cout << CYAN << "ADDITIONAL TESTS:" << NC << std::endl;
-
-        /* Test cases for char conversions */
-        testConversion("a", "char: 'a'\nint: 97\nfloat: 97.0f\ndouble: 97.0\n");
-        testConversion("z", "char: 'z'\nint: 122\nfloat: 122.0f\ndouble: 122.0\n");
-
-        /* Test cases for int conversions */
-        testConversion("42", "char: '*'\nint: 42\nfloat: 42.0f\ndouble: 42.0\n");
-        testConversion("-42", "char: impossible\nint: -42\nfloat: -42.0f\ndouble: -42.0\n");
-
-        /* Test cases for float conversions */
-        testConversion("-42.0f", "char: impossible\nint: -42\nfloat: -42.0f\ndouble: -42.0\n");
-        testConversion("nanf", "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan\n");
-        testConversion("+inff", "char: impossible\nint: impossible\nfloat: +inff\ndouble: +inf\n");
-        testConversion("-inff", "char: impossible\nint: impossible\nfloat: -inff\ndouble: -inf\n");
-
-        /* Test cases for double conversions */
-        testConversion("42.0", "char: '*'\nint: 42\nfloat: 42.0f\ndouble: 42.0\n");
-        testConversion("-42.0", "char: impossible\nint: -42\nfloat: -42.0f\ndouble: -42.0\n");
-        testConversion("+inf", "char: impossible\nint: impossible\nfloat: +inff\ndouble: +inf\n");
-        testConversion("-inf", "char: impossible\nint: impossible\nfloat: -inff\ndouble: -inf\n");
-
-        /* Test cases for impossible conversions */
-        testConversion("hello", "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n");
-        testConversion("42.0a", "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n");
-
-        std::cout << CYAN << "ADDITIONAL SUGGESTED TESTS:\n" << NC << std::endl;
-
-        /* Test cases for INT_MIN, INT_MAX, FLT_MIN, FLT_MAX, DBL_MIN, DBL_MAX */
-        std::cout << CYAN << "INT_MIN: " << INT_MIN << NC << std::endl;
-        testConversion(toString(INT_MIN), "char: impossible\nint: " + toString(INT_MIN) + "\nfloat: " + toString(static_cast<float>(INT_MIN)) + "f\ndouble: " + toString(static_cast<double>(INT_MIN)) + "\n");
-        
-        std::cout << CYAN << "INT_MAX: " << INT_MAX << NC << std::endl;
-        testConversion(toString(INT_MAX), "char: impossible\nint: " + toString(INT_MAX) + "\nfloat: " + toString(static_cast<float>(INT_MAX)) + "f\ndouble: " + toString(static_cast<double>(INT_MAX)) + "\n");
-
-        std::cout << CYAN << "FLT_MIN: " << FLT_MIN << NC << std::endl;
-        testConversion(toString(FLT_MIN), "char: Non displayable\nint: 0\nfloat: " + toString(FLT_MIN) + "f\ndouble: " + toString(static_cast<double>(FLT_MIN)) + "\n");
-        
-        std::cout << CYAN << "FLT_MAX: " << FLT_MAX << NC << std::endl;
-        testConversion(toString(FLT_MAX), "char: impossible\nint: impossible\nfloat: " + toString(FLT_MAX) + "f\ndouble: " + toString(static_cast<double>(FLT_MAX)) + "\n");
-
-        std::cout << CYAN << "DBL_MIN: " << DBL_MIN << NC << std::endl;
-        testConversion(toString(DBL_MIN), "char: Non displayable\nint: 0\nfloat: " + toString(static_cast<float>(DBL_MIN)) + "f\ndouble: " + toString(DBL_MIN) + "\n");
-        
-        std::cout << CYAN << "DBL_MAX: " << DBL_MAX << NC << std::endl;
-        testConversion(toString(DBL_MAX), "char: impossible\nint: impossible\nfloat: +" + toString(static_cast<float>(DBL_MAX)) + "f\ndouble: " + toString(DBL_MAX) + "\n");
-
-        /* Test case for positive negative floating point digit 0 */
-        std::cout << CYAN << "-0.0: " << NC << std::endl;
-        testConversion("-0.0", "char: Non displayable\nint: 0\nfloat: -0.0f\ndouble: -0.0\n");
-
-        std::cout << CYAN << "+0.0: " << NC << std::endl;
-        testConversion("+0.0", "char: Non displayable\nint: 0\nfloat: 0.0f\ndouble: 0.0\n");
-
-
-        /* Test cases for hexadecimal numbers */
-        std::cout << CYAN << "0x1A: " << NC << std::endl;
-        testConversion("0x1A", "char: Non displayable\nint: 26\nfloat: 26.0f\ndouble: 26.0\n");
-
-        /* Test cases for exponential numbers */
-        std::cout << CYAN << "1e10: " << NC << std::endl;
-        testConversion("1e10", "char: impossible\nint: impossible\nfloat: 10000000000.0f\ndouble: 10000000000.0\n");
-
-        std::cout << CYAN << "2.5e-3: " << NC << std::endl;
-        testConversion("2.5e-3", "char: Non displayable\nint: 0\nfloat: 0.0f\ndouble: 0.0\n");
-   
-        /* Test case for caracter impossible */
-        std::cout << CYAN << "CARACTERE IMPOSSIBLE: " << NC << std::endl;
-        std::cout << CYAN << "123abc: " << NC << std::endl;
-        testConversion("123abc", "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n");
-
-        std::cout << CYAN << "!@#$%: " << NC << std::endl;
-        testConversion("!@#$%", "char: impossible\nint: impossible\nfloat: impossible\ndouble: impossible\n");
-        
-        return 0;
-
-    }
     
-    ScalarConverter::convert(argv[1]);
+    /* Test iter with ordinary floats */
+    std::cout << MAGENTA << "TEST WITH FLOAT ORDINARY" << NC << std::endl;
+    float floatArray[] = {0.1f, 1.1f, 2.1f, 3.1f, 4.1f};
+    float floatArrayIncremented[] = {1.1f, 2.1f, 3.1f, 4.1f, 5.1f};
+    testIter(floatArray, 5, increment, floatArrayIncremented);
+
+    /* Test iter with float max */
+    std::cout << MAGENTA << "TEST WITH FLOAT MAX" << NC << std::endl;
+    float floatMax = std::numeric_limits<float>::max();
+    float floatMaxIncremented = floatMax + 1.0f;
+    float floatArrayMax[] = {floatMax};
+    float floatArrayMaxExpected[] = {floatMaxIncremented};
+    testIter(floatArrayMax, 1, increment, floatArrayMaxExpected);
+
+    /* Test iter with float min */
+    std::cout << MAGENTA << "TEST WITH FLOAT MIN" << NC << std::endl;
+    float floatMin = std::numeric_limits<float>::min();
+    float floatMinIncremented = floatMin + 1.0f;
+    float floatArrayMin[] = {floatMin};
+    float floatArrayMinExpected[] = {floatMinIncremented};
+    testIter(floatArrayMin, 1, increment, floatArrayMinExpected);
+
+    /* Test iter with float max + 1 */
+    std::cout << MAGENTA << "TEST WITH FLOAT MAX + 1" << NC << std::endl;
+    float floatMaxPlusOne = std::numeric_limits<float>::max() + 1.0f;
+    float floatMaxPlusOneIncremented = floatMaxPlusOne + 1.0f;
+    float floatArrayMaxPlusOne[] = {floatMaxPlusOne};
+    float floatArrayMaxPlusOneExpected[] = {floatMaxPlusOneIncremented};
+    testIter(floatArrayMaxPlusOne, 1, increment, floatArrayMaxPlusOneExpected);
+
+    /* Test iter with float min - 1 */
+    std::cout << MAGENTA << "TEST WITH FLOAT MIN - 1" << NC << std::endl;
+    float floatMinMinusOne = std::numeric_limits<float>::min() - 1.0f;
+    float floatMinMinusOneIncremented = floatMinMinusOne + 1.0f;
+    float floatArrayMinMinusOne[] = {floatMinMinusOne};
+    float floatArrayMinMinusOneExpected[] = {floatMinMinusOneIncremented};
+    testIter(floatArrayMinMinusOne, 1, increment, floatArrayMinMinusOneExpected);
+
+
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+    std::cout << CYAN << "/*                                    DOUBLE                                  */" << NC << std::endl;
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+
+    std::cout << MAGENTA << "TEST WITH DOUBLE ORDINARY" << NC << std::endl;
+
+    /* Test iter with doubles */
+    double doubleArray[] = {0.1, 1.1, 2.1, 3.1, 4.1};
+    double doubleArrayIncremented[] = {1.1, 2.1, 3.1, 4.1, 5.1};
+    testIter(doubleArray, 5, increment, doubleArrayIncremented);
+
+    /* Test iter with double max */
+    std::cout << MAGENTA << "TEST WITH DOUBLE MAX" << NC << std::endl;
+    double doubleMax = std::numeric_limits<double>::max();
+    double doubleMaxIncremented = doubleMax + 1.0;
+    double doubleArrayMax[] = {doubleMax};
+    double doubleArrayMaxExpected[] = {doubleMaxIncremented};
+    testIter(doubleArrayMax, 1, increment, doubleArrayMaxExpected);
+
+    /* Test iter with double min */
+    std::cout << MAGENTA << "TEST WITH DOUBLE MIN" << NC << std::endl;
+    double doubleMin = std::numeric_limits<double>::min();
+    double doubleMinIncremented = doubleMin + 1.0;
+    double doubleArrayMin[] = {doubleMin};
+    double doubleArrayMinExpected[] = {doubleMinIncremented};
+    testIter(doubleArrayMin, 1, increment, doubleArrayMinExpected);
+
+    /* Test iter with double max + 1 */
+    std::cout << MAGENTA << "TEST WITH DOUBLE MAX + 1" << NC << std::endl;
+    double doubleMaxPlusOne = std::numeric_limits<double>::max() + 1.0;
+    double doubleMaxPlusOneIncremented = doubleMaxPlusOne + 1.0;
+    double doubleArrayMaxPlusOne[] = {doubleMaxPlusOne};
+    double doubleArrayMaxPlusOneExpected[] = {doubleMaxPlusOneIncremented};
+    testIter(doubleArrayMaxPlusOne, 1, increment, doubleArrayMaxPlusOneExpected);
+
+    /* Test iter with double min - 1 */
+    std::cout << MAGENTA << "TEST WITH DOUBLE MIN - 1" << NC << std::endl;
+    double doubleMinMinusOne = std::numeric_limits<double>::min() - 1.0;
+    double doubleMinMinusOneIncremented = doubleMinMinusOne + 1.0;
+    double doubleArrayMinMinusOne[] = {doubleMinMinusOne};
+    double doubleArrayMinMinusOneExpected[] = {doubleMinMinusOneIncremented};
+    testIter(doubleArrayMinMinusOne, 1, increment, doubleArrayMinMinusOneExpected);
+
+
+
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+    std::cout << CYAN << "/*                                    STRING                                  */" << NC << std::endl;
+    std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+    
+    /* Test iter with strings */
+    std::string strArray[] = {"Hello", "World", "42", "School"};
+    std::string strArrayExpected[] = {"Hello", "World", "42", "School"};
+    
+    iter(strArray, 4, printElement);
+    ASSERT_TEST(true, "Print elements of string array");
 
     return 0;
 }
-
-/* main.cpp */
