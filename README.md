@@ -1,4 +1,4 @@
-# cpp07 - École 42 | Paris**
+# cpp07 - École 42 | Paris
 
 ## Introduction
 ...
