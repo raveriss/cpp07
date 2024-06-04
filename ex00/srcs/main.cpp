@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:33:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 01:53:08 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/04 02:25:25 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,13 @@ int main(int argc, char *argv[])
 
 		/* Test INT_MIN and INT_MAX */
 		std::cout << CYAN << "\nTEST WITH INT_MIN AND INT_MAX" << NC << std::endl;
+
+		/* Test swap INT_MIN and INT_MAX */
+		int int_min = std::numeric_limits<int>::min();
+		int int_max = std::numeric_limits<int>::max();
+		::swap(int_min, int_max);
+		ASSERT_TEST(int_min == std::numeric_limits<int>::max() && int_max == std::numeric_limits<int>::min(), 
+					"swap(int): int_min = " + toString(int_min) + ", int_max = " + toString(int_max));
 		
 		ASSERT_TEST(::min(std::numeric_limits<int>::min(), std::numeric_limits<int>::max()) == std::numeric_limits<int>::min(), 
 					"min(int): min(INT_MIN, INT_MAX) == INT_MIN");
@@ -107,6 +114,11 @@ int main(int argc, char *argv[])
 					"min(long long): min(INT_MIN-1, INT_MAX+1) == INT_MIN-1");
 		ASSERT_TEST(::max(min_below, max_above) == max_above, 
 					"max(long long): max(INT_MIN-1, INT_MAX+1) == INT_MAX+1");
+
+		/* Test swap INT_MIN-1 and INT_MAX+1 */
+		::swap(min_below, max_above);
+		ASSERT_TEST(min_below == static_cast<long long int>(std::numeric_limits<int>::max()) + 1 && max_above == static_cast<long long int>(std::numeric_limits<int>::min()) - 1, 
+					"swap(long long): min_below = " + toString(min_below) + ", max_above = " + toString(max_above));
 
 		std::cout << CYAN << "\nTEST WITH STRINGS" << NC << std::endl;
 		
@@ -134,7 +146,7 @@ int main(int argc, char *argv[])
 		ASSERT_TEST(::min(3.14f, 2.71f) == 2.71f, "min(float): min(3.14f, 2.71f) == 2.71f");
 		ASSERT_TEST(::max(3.14f, 2.71f) == 3.14f, "max(float): max(3.14f, 2.71f) == 3.14f");
 
-		/* Test swap with float min and max */
+		/* Test swap with float max + 1 and min - 1 */
         float float_min_1 = std::numeric_limits<float>::min() - 1;
         float float_max_1 = std::numeric_limits<float>::max() + 1;
         ::swap(float_min_1, float_max_1);
@@ -142,9 +154,9 @@ int main(int argc, char *argv[])
                     "swap(float): float_min_1 = " + toString(float_min_1) + ", float_max_1 = " + toString(float_max_1));
 
         /* Test swap with float -0.0 and +0.0 */
-        float neg_zero = -0.01f, pos_zero = +0.01f;
+        float neg_zero = -0.0f, pos_zero = +0.0f;
         ::swap(neg_zero, pos_zero);
-        ASSERT_TEST(neg_zero == +0.01f && pos_zero == -0.01f, 
+        ASSERT_TEST(neg_zero == +0.0f && pos_zero == -0.0f, 
                     "swap(float): neg_zero = " + toString(neg_zero) + ", pos_zero = " + toString(pos_zero));
 
 		std::cout << CYAN << "\nTEST WITH DOUBLES" << NC << std::endl;
@@ -156,11 +168,18 @@ int main(int argc, char *argv[])
 		ASSERT_TEST(double_min == std::numeric_limits<double>::max() && double_max == std::numeric_limits<double>::min(), 
 					"swap(double): double_min = " + toString(double_min) + ", double_max = " + toString(double_max));
 
-		// Test min and max with double
+		/* Test min and max with double */
 		ASSERT_TEST(::min(3.141592653589793, 2.718281828459045) == 2.718281828459045, 
 					"min(double): min(3.141592653589793, 2.718281828459045) == 2.718281828459045");
 		ASSERT_TEST(::max(3.141592653589793, 2.718281828459045) == 3.141592653589793, 
 					"max(double): max(3.141592653589793, 2.718281828459045) == 3.141592653589793");
+
+		/* Test swap with double min and max */
+        double double_min_1 = std::numeric_limits<double>::min() - 1;
+        double double_max_1 = std::numeric_limits<double>::max() + 1;
+        ::swap(double_min_1, double_max_1);
+        ASSERT_TEST(double_min_1 == std::numeric_limits<double>::max() + 1 && double_max_1 == std::numeric_limits<double>::min() - 1, 
+                    "swap(double): double_min_1 = " + toString(double_min_1) + ", double_max_1 = " + toString(double_max_1));
 
 		// Test min and max with -0.0 and +0.0
 		ASSERT_TEST(::min(-0.01, +0.01) == -0.01, "min(double): min(-0.01, +0.01) == -0.01");
@@ -177,3 +196,4 @@ int main(int argc, char *argv[])
 }
 
 /* main.cpp */
+
