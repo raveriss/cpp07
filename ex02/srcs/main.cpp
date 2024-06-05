@@ -69,9 +69,7 @@ void captureAndCompareNewValues(Array<int>& numbers, const std::string& expected
 
 int main(int, char**)
 {
-
     {
-
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
 		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std ::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
@@ -120,7 +118,7 @@ int main(int, char**)
         {
             numbers[i] = rand();
         }
-        delete [] mirror;//
+        delete [] mirror;
     }
 
     {
@@ -129,11 +127,16 @@ int main(int, char**)
 		std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std ::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 
-
+        /* Instanciation template Array<int> avec taille MAX_VAL */
         Array<int> numbers(MAX_VAL);
+
+        /* Instanciation tableau miroir */
         int* mirror = new int[MAX_VAL];
+
+        /* Initialisation des valeurs aléatoires */
         srand(time(NULL));
         
+        /* Assigner les valeurs aléatoires aux deux tableaux */
         for (int i = 0; i < MAX_VAL; i++)
         {
             const int value = rand();
@@ -141,23 +144,23 @@ int main(int, char**)
             mirror[i] = value;
         }
         
-        // Initial values
-
         std::cout << MAGENTA << "TEST THAT THE VALUES ​​AFTER COPYING ARE INTACT" << NC << std::endl;
-
         std::cout << YELLOW << "Initial values:" << NC << std::endl;
-        for (int i = 0; i < 10; i++) // display only the first 10 for brevity
+
+        /* display only the first 10 for brevity */
+        for (int i = 0; i < 10; i++)
         {
-            std::cout << "numbers[" << i << "] = " << numbers[i] << "\nmirror[" << i << "] = " << mirror[i] << std::endl;
+            std::cout << "numbers[" << i << "] = " << numbers[i] << "\nmirror[" << i << "] = " << mirror[i] << std::endl << std::endl;
         }
         
         // SCOPE
         {
+            /* Copy constructor */
             Array<int> tmp = numbers;
             Array<int> test(tmp);
         }
 
-        // Check values after copying
+        /* Check values after copying */
         bool valuesIntact = true;
         for (int i = 0; i < MAX_VAL; i++)
         {
@@ -171,7 +174,7 @@ int main(int, char**)
 
         std::cout << std::endl;
 
-        // Exception handling tests
+        /* Exception handling tests */
         std::cout << MAGENTA << "TEST NEGATIVE INDEX EXCEPTION HANDLING" << NC << std::endl;
 
         captureAndCompareOutput(testInvalidIndexNegative, "Index out of range\n", "Exception for negative index");
@@ -183,7 +186,7 @@ int main(int, char**)
 
         std::cout << std::endl;
 
-        // Reassigning new random values
+        /* Reassigning new random values */
         for (int i = 0; i < MAX_VAL; i++)
         {
             numbers[i] = rand();
@@ -198,7 +201,9 @@ int main(int, char**)
 
         // Initial values
         std::cout << YELLOW << "New values after reassignment:" << NC << std::endl;
-        for (int i = 0; i < 10; i++) // display only the first 10 for brevity
+
+        /* display only the first 10 for brevity */
+        for (int i = 0; i < 10; i++)
         {
             std::cout << "numbers[" << i << "] = " << numbers[i] << "\nmirror[" << i << "] = " << mirror[i] << std::endl;
         }
