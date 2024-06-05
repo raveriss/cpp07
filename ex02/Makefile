@@ -6,7 +6,7 @@
 #    By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 10:21:16 by raveriss          #+#    #+#              #
-#    Updated: 2024/06/04 22:15:56 by raveriss         ###   ########.fr        #
+#    Updated: 2024/06/05 10:11:49 by raveriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ INC_DIR = incs
 # Compiler
 CXX = c++
 
-# The -MMD flag generates dependencies
-CXXFLAGS = -Wall -Wextra -Werror -Wconversion -std=c++98 -MMD -I$(INC_DIR)
+# The -MMD flag generates dependencies -Wconversion 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -I$(INC_DIR)
 
 # Source files and objects
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)

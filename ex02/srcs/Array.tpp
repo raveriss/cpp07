@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/05 10:03:09 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/05 10:05:29 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
+/* Directive pour éviter les inclusions multiples d'un fichier d'en-tête */
 #pragma once
 
 /* Inclure les fichiers .hpp nécessaires */

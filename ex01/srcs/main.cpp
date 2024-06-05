@@ -6,17 +6,18 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:11:22 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 21:07:04 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/05 10:07:34 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* Inclusion du fichier d'en-tête de la fonction template iter */
+#include "../incs/iter.hpp"
 
 /* Inclusion de la bibliothèque standard pour l'utilisation de flux d'entrée/sortie standard */
 #include <iostream>
 
+/* Inclusion de la bibliothèque standard pour l'utilisation de std::numeric_limits */
 #include <limits>
-
-/* Inclusion du fichier d'en-tête de la fonction template iter */
-#include "iter.hpp"
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
