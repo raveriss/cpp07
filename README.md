@@ -4,9 +4,9 @@
 
 Ce projet fait partie des exercices du module CPP07. Il a pour but de renforcer les compétences en programmation C++98, en mettant l'accent sur l'utilisation des templates en C++.
 
-### Objectif de l'exercice 00
+### Exercise 00: Start with a few functions
 
-L'exercice 00 consiste à créer plusieurs fonctions templates en C++. Vous allez développer des fonctions capables de manipuler des valeurs de types génériques. Les fonctions à implémenter incluent :
+L'objectif de L'exercice 00 consiste à créer plusieurs fonctions templates en C++. Vous allez développer des fonctions capables de manipuler des valeurs de types génériques. Les fonctions à implémenter incluent :
 
 - `swap`: Permute les valeurs de deux arguments donnés.
 - `min`: Compare deux valeurs et renvoie la plus petite.
@@ -49,7 +49,7 @@ Après la compilation, exécutez le programme avec la commande :
 ```
 Remplacez arg par les arguments nécessaires au fonctionnement de votre programme.
 
-### Exécution pour Tester
+### Exécution du Tester
 Après la compilation, exécutez le programme avec la commande et l'argument tester :
 
 ```bash
