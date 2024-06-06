@@ -1,18 +1,69 @@
 # cpp07 - École 42 | Paris
 
-## Introduction
-...
-## Project Structure
-...
-##
-### Exercise 00: Start with a few functions
+## Description
+
+Ce projet fait partie des exercices du module CPP05. Il a pour but de renforcer les compétences en programmation C++98, en mettant l'accent sur la gestion des exceptions et les bonnes pratiques de codage.
+
+## Exercise 00: Start with a few functions
+
+### Objectif de l'exercice
+
+L'exercice 00 consiste à créer une application qui démonstrue l'utilisation correcte des exceptions en C++. Vous allez développer un programme capable de gérer diverses situations d'erreur en utilisant les mécanismes d'exceptions. L'accent sera mis sur la création de classes robustes, la gestion de la mémoire, et le respect des conventions de codage en C++98.
+
+## Structure du Projet
+
+Le projet est organisé de la manière suivante :
+
 - **Directory:** `ex00/`
 - **Files to submit:**
   - `incs/whatever.hpp`
   - `Makefile`
   - `srcs/main.cpp`
 
-#### Functionality
+### Description des Fichiers
+
+- `incs/whatever.hpp`: Contient la déclaration des classes et fonctions utilisées dans le projet.
+- `srcs/main.cpp`: Contient le point d'entrée du programme et la logique principale.
+- `Makefile`: Fichier pour automatiser la compilation du projet.
+
+## Compilation
+
+Pour compiler le projet, utilisez la commande suivante dans le terminal :
+
+```bash
+make
+```
+Cette commande génère un exécutable nommé whatever dans le répertoire courant.
+
+## Exécution
+### Exécution Simple
+Après la compilation, exécutez le programme avec la commande :
+
+```bash
+
+./whatever arg
+```
+Remplacez arg par les arguments nécessaires au fonctionnement de votre programme.
+
+### Exécution pour Tester
+Après la compilation, exécutez le programme avec la commande et l'argument tester :
+
+```bash
+
+./whatever tester
+```
+Cette commande permet de lancer le programme en mode test, si ce mode est implémenté dans le code.
+
+## Fonctionnalités
+- Gestion des exceptions : Le programme démontre l'utilisation des exceptions pour gérer les erreurs de manière propre et sécurisée.
+- Suivi des bonnes pratiques de codage C++98 : Respect strict des conventions de codage et des standards de C++98.
+- Structure de code modulaire et maintenable : Le code est organisé de manière à être facilement compréhensible et extensible.
+
+## Contributeurs
+raveriss - Développeur principal
+
+## Remarques
+Ce projet suit les conventions de codage strictes pour C++98, évitant l'utilisation de fonctionnalités modernes et de conteneurs STL. Les bonnes pratiques pour la gestion de la mémoire et la portabilité sont également respectées.
 ...
 ##
 ### Exercise 01: Iter
