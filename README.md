@@ -2,13 +2,17 @@
 
 ## Description
 
-Ce projet fait partie des exercices du module CPP05. Il a pour but de renforcer les compétences en programmation C++98, en mettant l'accent sur la gestion des exceptions et les bonnes pratiques de codage.
+Ce projet fait partie des exercices du module CPP07. Il a pour but de renforcer les compétences en programmation C++98, en mettant l'accent sur l'utilisation des templates en C++.
 
-## Exercise 00: Start with a few functions
+### Objectif de l'exercice 00
 
-### Objectif de l'exercice
+L'exercice 00 consiste à créer plusieurs fonctions templates en C++. Vous allez développer des fonctions capables de manipuler des valeurs de types génériques. Les fonctions à implémenter incluent :
 
-L'exercice 00 consiste à créer une application qui démonstrue l'utilisation correcte des exceptions en C++. Vous allez développer un programme capable de gérer diverses situations d'erreur en utilisant les mécanismes d'exceptions. L'accent sera mis sur la création de classes robustes, la gestion de la mémoire, et le respect des conventions de codage en C++98.
+- `swap`: Permute les valeurs de deux arguments donnés.
+- `min`: Compare deux valeurs et renvoie la plus petite.
+- `max`: Compare deux valeurs et renvoie la plus grande.
+
+Ces fonctions doivent pouvoir être appelées avec n'importe quel type d'argument. La seule exigence est que les deux arguments doivent avoir le même type et supporter tous les opérateurs de comparaison.
 
 ## Structure du Projet
 
