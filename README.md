@@ -4,7 +4,7 @@
 
 Ce projet fait partie des exercices du module CPP07. Il a pour but de renforcer les compétences en programmation C++98, en mettant l'accent sur l'utilisation des templates en C++.
 
-### Exercise 00: Start with a few functions
+## Exercise 00: Start with a few functions
 
 L'objectif de L'exercice 00 consiste à créer plusieurs fonctions templates en C++. Vous allez développer des fonctions capables de manipuler des valeurs de types génériques. Les fonctions à implémenter incluent :
 
