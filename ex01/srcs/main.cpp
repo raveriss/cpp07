@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /* Inclusion du fichier d'en-tête de la fonction template iter */
-#include "../incs/iter.hpp"
+#include "../incs/Iter.hpp"
 
 /* Inclusion de la bibliothèque standard pour l'utilisation de flux d'entrée/sortie standard */
 #include <iostream>

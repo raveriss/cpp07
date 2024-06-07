@@ -10,8 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-# Makefile for the Zombie project with progress bar and separate object directory
+# Utilise bash pour les commandes Makefile (nécessaire pour certaines syntaxes comme if, else if)
+SHELL := /bin/bash
 
+# Nom du projet
 NAME = whatever
 SRC_DIR = srcs
 OBJ_DIR = obj
@@ -19,7 +21,10 @@ INC_DIR = incs
 
 # Compiler and flags
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -Wconversion -std=c++98 -MMD -I$(INC_DIR)
+
+# -Wall: turns on most, but not all, compiler warnings
+# -Wconversion : Warn for implicit conversions that may alter a value
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -I$(INC_DIR)
 
 # Source files and objects
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
@@ -38,6 +43,7 @@ CURRENT_FILE = 0
 # Main targets
 all: $(NAME)
 
+# Rule for the executable
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) -o $@ $^
 	@echo ""
@@ -56,31 +62,26 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 # Include dependencies
 -include $(DEPS)
 
-# Function to display the progress bar
-define progress_bar
-	@$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE) + 1))))
-	@$(eval PERCENT=$(shell echo $$((100 * $(CURRENT_FILE) / $(TOTAL_FILES)))))
-	@printf "\r%s [%-50s] %d%%" "$(1)" "$$(printf '#%.0s' $$(seq 1 $$(($(PERCENT) / 2))))" $(PERCENT)
-endef
-
-# Function to reset the progress variables
-define reset_progress
-	@$(eval CURRENT_FILE=0)
-	@$(eval TOTAL_FILES=$(1))
-endef
-
+# Nettoie les objets et dépendances générés par le build
 clean:
-	@echo "Cleaning..."
-	@$(foreach obj,$(OBJS) $(DEPS),rm -f $(obj);)
-	@rm -rf obj 
-	@echo "Objects and dependencies cleaned."
+	@if [ -d $(OBJ_DIR) ]; then \
+		echo "Cleaning..."; \
+		rm -f $(OBJS) $(DEPS); \
+		rm -rf $(OBJ_DIR); \
+		echo "Objects and dependencies cleaned."; \
+	else \
+		echo "No objects or dependencies to clean."; \
+	fi
 
-
+# Nettoie les objets, dépendances et exécutable générés par le build
 fclean: clean
-	@echo "Removing $(NAME)..."
-	@rm -f $(NAME)
-	@echo "$(NAME) removed."
-
+	@if [ -f $(NAME) ]; then \
+		echo "Removing $(NAME)..."; \
+		rm -f $(NAME); \
+		echo "$(NAME) removed."; \
+	else \
+		echo "$(NAME) not present."; \
+	fi
 
 # Rebuild everything
 re: fclean all
