@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:11:22 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/05 10:07:34 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:31:09 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,25 @@
     if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
     else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
-/* Template function to print an element */
+/**
+ * @brief Template function to print an element
+ */
 template <typename T>
 void printElement(T &element) {
     std::cout << element << std::endl;
 }
 
-/* Template function to increment an element */
+/**
+ * @brief Template function to increment an element
+ */
 template <typename T>
 void increment(T &element) {
     ++element;
 }
 
-/* Template function to test iter function */
+/**
+ * @brief Template function to test iter function
+ */
 template <typename T>
 void testIter(T *array, int length, void (*func)(T &), T *expectedArray) {
     iter(array, length, func);
@@ -60,7 +66,9 @@ void testIter(T *array, int length, void (*func)(T &), T *expectedArray) {
     ASSERT_TEST(passed, "iter function works correctly.");
 }
 
-/* Main entry point of the program */
+/**
+ * @brief Main function
+ */
 int main() {
     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
     std::cout << CYAN << "/*                                    CHAR                                    */" << NC << std::endl;
@@ -119,7 +127,6 @@ int main() {
     std::cout << CYAN << "/*                                    FLOAT                                   */" << NC << std::endl;
     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
     
-    
     /* Test iter with ordinary floats */
     std::cout << MAGENTA << "TEST WITH FLOAT ORDINARY" << NC << std::endl;
     float floatArray[] = {0.1f, 1.1f, 2.1f, 3.1f, 4.1f};
@@ -157,7 +164,6 @@ int main() {
     float floatArrayMinMinusOne[] = {floatMinMinusOne};
     float floatArrayMinMinusOneExpected[] = {floatMinMinusOneIncremented};
     testIter(floatArrayMinMinusOne, 1, increment, floatArrayMinMinusOneExpected);
-
 
     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
     std::cout << CYAN << "/*                                    DOUBLE                                  */" << NC << std::endl;
@@ -202,8 +208,6 @@ int main() {
     double doubleArrayMinMinusOneExpected[] = {doubleMinMinusOneIncremented};
     testIter(doubleArrayMinMinusOne, 1, increment, doubleArrayMinMinusOneExpected);
 
-
-
     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
     std::cout << CYAN << "/*                                    STRING                                  */" << NC << std::endl;
     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
@@ -217,3 +221,5 @@ int main() {
 
     return 0;
 }
+
+/* main.cpp */

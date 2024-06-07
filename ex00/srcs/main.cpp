@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 00:33:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/04 17:32:23 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:18:46 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
  *        Utilisé pour vérifier si une valeur est NaN (Not a Number).
  */
 #include <cmath>
-
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
@@ -118,7 +117,6 @@ int main(int argc, char *argv[])
 		int x1 = 'a', y1 = 'Z';
 		::swap(x1, y1);
 		ASSERT_TEST(x1 == 'Z' && y1 == 'a', "swap(int): x = " + std::string(1, static_cast<char>(x1)) + ", y = " + std::string(1, static_cast<char>(y1)));
-
 
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
 		std::cout << CYAN << "/*                                   INTEGERS                                 */" << NC << std ::endl;
@@ -269,8 +267,7 @@ int main(int argc, char *argv[])
         ::swap(double_equal_1, double_equal_2);
         ASSERT_TEST(double_equal_1 == 3.141592653589793 && double_equal_2 == 3.141592653589793, 
                     "swap(double): double_equal_1 = " + toString(double_equal_1) + ", double_equal_2 = " + toString(double_equal_2));
-
-
+		
 		return 0;
 	}
 

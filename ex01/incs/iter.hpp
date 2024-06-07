@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 19:38:13 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/05 10:08:19 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:28:05 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
  * @brief Iterates over an array of elements
 */
 template <typename T>
-void iter(T *array, int length, void (*func)(T &)) {
-    for (int i = 0; i < length; ++i) {
+void iter(T *array, int length, void (*func)(T &))
+{
+    for (int i = 0; i < length; ++i)
+    {
         func(array[i]);
     }
 }
+
+/* iter.hpp */

@@ -1,9 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/07 15:33:32 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/07 17:18:54 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* Inclusion de la bibliothèque standard pour l'utilisation de cout cin */
 #include <iostream>
+
+/* Inclusion de la bibliothèque std pour l'utilisation de rand srand */
 #include <cstdlib>
+
+/* Inclusion de la bibliothèque std pour l'utilisation de time */
 #include <ctime>
-#include <Array.hpp>
+
+/* Inclusion de la classe Array */
+#include <../incs/Array.hpp>
+
+/* Inclusion de la bibliothèque standard pour std::ostringstream */
 #include <sstream>
 
+/**
+ * @brief Inclusion de la bibliothèque standard pour std::strcmp
+ *        Utilisé pour comparer des chaînes de caractères C-style.
+ */
+#include <cstring>
+
+/* Definitions of the maximum value for the array */
 #define MAX_VAL 750
 
 /* Definitions of ANSI color codes for console output */
@@ -21,7 +49,8 @@
     if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
     else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
-void captureAndCompareOutput(void (*func)(), const std::string& expected, const std::string& message) {
+void captureAndCompareOutput(void (*func)(), const std::string& expected, const std::string& message)
+{
     std::ostringstream buffer;
     std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
     
@@ -32,31 +61,41 @@ void captureAndCompareOutput(void (*func)(), const std::string& expected, const 
     ASSERT_TEST(output == expected, message);
 }
 
-void testInvalidIndexNegative() {
-    try {
+void testInvalidIndexNegative()
+{
+    try
+    {
         Array<int> numbers(MAX_VAL);
         numbers[-2] = 0;
-    } catch(const std::exception& e) {
+    }
+    catch(const std::exception& e)
+    {
         std::cout << e.what() << std::endl;
     }
 }
 
-void testInvalidIndexOverflow() {
+void testInvalidIndexOverflow()
+{
     try {
         Array<int> numbers(MAX_VAL);
         numbers[MAX_VAL] = 0;
-    } catch(const std::exception& e) {
+    }
+    catch(const std::exception& e)
+    {
         std::cout << e.what() << std::endl;
     }
 }
 
-void printNewValues(Array<int>& numbers) {
-    for (int i = 0; i < 10; i++) {
+void printNewValues(Array<int>& numbers)
+{
+    for (int i = 0; i < 10; i++)
+    {
         std::cout << "numbers[" << i << "] = " << numbers[i] << std::endl;
     }
 }
 
-void captureAndCompareNewValues(Array<int>& numbers, const std::string& expected, const std::string& message) {
+void captureAndCompareNewValues(Array<int>& numbers, const std::string& expected, const std::string& message)
+{
     std::ostringstream buffer;
     std::streambuf *old = std::cout.rdbuf(buffer.rdbuf());
     
@@ -67,8 +106,9 @@ void captureAndCompareNewValues(Array<int>& numbers, const std::string& expected
     ASSERT_TEST(output == expected, message);
 }
 
-int main(int, char**)
+int main(int argc, char *argv[])
 {
+    if (argc == 1)
     {
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
 		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std ::endl;
@@ -121,11 +161,20 @@ int main(int, char**)
         delete [] mirror;
     }
 
+	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
     {
-
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
 		std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std ::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
+
+        std::cout << MAGENTA << "TEST EMPTY ARRAY" << NC << std::endl;
+
+        Array<int> emptyArray;
+        ASSERT_TEST(emptyArray.size() == 0, "Empty array should have size 0");
+
+        std::cout << std::endl << MAGENTA << "TEST ARRAY SIZE" << NC << std::endl;
+        Array<int> array(MAX_VAL);
+        ASSERT_TEST(array.size() == MAX_VAL, "Array should have the specified size");
 
         /* Instanciation template Array<int> avec taille MAX_VAL */
         Array<int> numbers(MAX_VAL);
@@ -144,7 +193,7 @@ int main(int, char**)
             mirror[i] = value;
         }
         
-        std::cout << MAGENTA << "TEST THAT THE VALUES ​​AFTER COPYING ARE INTACT" << NC << std::endl;
+        std::cout << MAGENTA << std::endl << "TEST THAT THE VALUES ​​AFTER COPYING ARE INTACT" << NC << std::endl;
         std::cout << YELLOW << "Initial values:" << NC << std::endl;
 
         /* display only the first 10 for brevity */
@@ -153,7 +202,7 @@ int main(int, char**)
             std::cout << "numbers[" << i << "] = " << numbers[i] << "\nmirror[" << i << "] = " << mirror[i] << std::endl << std::endl;
         }
         
-        // SCOPE
+        /* SCOPE */
         {
             /* Copy constructor */
             Array<int> tmp = numbers;
@@ -199,7 +248,7 @@ int main(int, char**)
 
         std::cout << MAGENTA << "TEST REASSIGNMENT" << NC << std::endl;
 
-        // Initial values
+        /* Initial values */
         std::cout << YELLOW << "New values after reassignment:" << NC << std::endl;
 
         /* display only the first 10 for brevity */
@@ -211,5 +260,14 @@ int main(int, char**)
 
         delete [] mirror;
     }
+
+	else
+	{
+		std::cout << RED << "Usage: ./array or ./array tester" << NC << std::endl;
+		return 1;
+	}
+    
     return 0;
 }
+
+/* main.cpp */
