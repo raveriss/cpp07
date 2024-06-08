@@ -19,7 +19,7 @@ Ces fonctions doivent pouvoir être appelées avec n'importe quel type d'argumen
 Le projet est organisé de la manière suivante :
 
 - **Directory:** `ex00/`
-- **Files to submit:**
+- **Files submitted:**
   - `incs/whatever.hpp`
   - `Makefile`
   - `srcs/main.cpp`
@@ -76,7 +76,7 @@ Cette fonction doit pouvoir être appelée avec n'importe quel type d'argument. 
 Le projet est organisé de la manière suivante :
 
 - **Directory: ex01/**
-- **Files to submit:**
+- **Files submitted:**
   - `incs/Iter.hpp`
   - `Makefile`
   - `srcs/main.cpp`
@@ -118,7 +118,7 @@ Une classe template Array permettant la création, l'accès, et la gestion d'un 
 Le projet est organisé de la manière suivante :
 
 - **Directory:** ex02/
-- **Files to submit:**
+- **Files submitted:**
   - `incs/Array.hpp`
   - `Makefile`
   - `srcs/Array.tpp`
