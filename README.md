@@ -62,23 +62,52 @@ Cette commande permet de lancer le programme en mode test, si ce mode est implé
 - Gestion des exceptions : Le programme démontre l'utilisation des exceptions pour gérer les erreurs de manière propre et sécurisée.
 - Suivi des bonnes pratiques de codage C++98 : Respect strict des conventions de codage et des standards de C++98.
 - Structure de code modulaire et maintenable : Le code est organisé de manière à être facilement compréhensible et extensible.
-
-## Contributeurs
-raveriss - Développeur principal
-
-## Remarques
-Ce projet suit les conventions de codage strictes pour C++98, évitant l'utilisation de fonctionnalités modernes et de conteneurs STL. Les bonnes pratiques pour la gestion de la mémoire et la portabilité sont également respectées.
 ...
-##
-### Exercise 01: Iter
-- **Directory:** `ex01/`
+#
+## Exercise 01: Template Iteration
+L'objectif de l'exercice 01 consiste à créer une fonction template en C++ pour itérer sur des collections. Vous allez développer une fonction capable de manipuler des éléments de types génériques. La fonction à implémenter inclut :
+
+- `iter`: Applique une fonction donnée à chaque élément d'une collection.
+
+Cette fonction doit pouvoir être appelée avec n'importe quel type d'argument. Les éléments de la collection doivent supporter l'opérateur de déréférencement.
+
+## Structure du Projet
+
+Le projet est organisé de la manière suivante :
+
+- **Directory:** ex01/
 - **Files to submit:**
-  - `incs/iter.hpp`
+  - `incs/Iter.hpp`
   - `Makefile`
   - `srcs/main.cpp`
+  
+### Description des Fichiers
+- `incs/Iter.hpp`: Contient la déclaration et la définition de la fonction template iter.
+- `srcs/main.cpp`: Contient le point d'entrée du programme et la logique principale.
+- `Makefile`: Fichier pour automatiser la compilation du projet.
 
-#### Functionality
-...
+## Compilation
+
+Pour compiler le projet, utilisez la commande suivante dans le terminal :
+
+```bash
+make
+```
+Cette commande génère un exécutable nommé iter dans le répertoire courant.
+
+## Exécution
+Exécution Simple
+Après la compilation, exécutez le programme avec la commande :
+
+```bash
+./iter
+```
+Cette commande permet de lancer le programme.
+
+## Fonctionnalités
+- Gestion des exceptions : Le programme démontre l'utilisation des exceptions pour gérer les erreurs de manière propre et sécurisée.
+- Suivi des bonnes pratiques de codage C++98 : Respect strict des conventions de codage et des standards de C++98.
+- Structure de code modulaire et maintenable : Le code est organisé de manière à être facilement compréhensible et extensible.
 ##
 ### Exercise 02: Array
 - **Directory:** `ex02/`
@@ -93,6 +122,12 @@ Ce projet suit les conventions de codage strictes pour C++98, évitant l'utilisa
 
 ## Compilation and Execution
 Navigate to the specific exercise directory and use the `make` command to compile the projects. Each executable can be run directly to demonstrate the functionalities implemented.
+
+## Contributeurs
+raveriss - Développeur principal
+
+## Remarques
+Ce projet suit les conventions de codage strictes pour C++98, évitant l'utilisation de fonctionnalités modernes et de conteneurs STL. Les bonnes pratiques pour la gestion de la mémoire et la portabilité sont également respectées.
 
 ## Ressources Utilisées
 - [Apprenez à programmer en C++ sur OpenClassrooms](https://openclassrooms.com/fr/courses/1894236-apprenez-a-programmer-en-c)
