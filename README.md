@@ -63,7 +63,7 @@ Cette commande permet de lancer le programme en mode test, si ce mode est implé
 - Suivi des bonnes pratiques de codage C++98 : Respect strict des conventions de codage et des standards de C++98.
 - Structure de code modulaire et maintenable : Le code est organisé de manière à être facilement compréhensible et extensible.
 ...
-#
+##
 ## Exercise 01: Template Iteration
 L'objectif de l'exercice 01 consiste à créer une fonction template en C++ pour itérer sur des collections. Vous allez développer une fonction capable de manipuler des éléments de types génériques. La fonction à implémenter inclut :
 
@@ -75,7 +75,7 @@ Cette fonction doit pouvoir être appelée avec n'importe quel type d'argument. 
 
 Le projet est organisé de la manière suivante :
 
-- **Directory:** ex01/
+- **Directory: ex01/**
 - **Files to submit:**
   - `incs/Iter.hpp`
   - `Makefile`
@@ -109,19 +109,59 @@ Cette commande permet de lancer le programme.
 - Suivi des bonnes pratiques de codage C++98 : Respect strict des conventions de codage et des standards de C++98.
 - Structure de code modulaire et maintenable : Le code est organisé de manière à être facilement compréhensible et extensible.
 ##
-### Exercise 02: Array
-- **Directory:** `ex02/`
+## Exercise 02: Template Array
+
+L'objectif de l'exercice 02 consiste à créer une classe template en C++ pour gérer des tableaux dynamiques de type générique. Vous allez développer une classe capable de manipuler des éléments de types génériques avec les fonctionnalités nécessaires pour accéder aux éléments de manière sécurisée. Les fonctionnalités à implémenter incluent :
+
+Une classe template Array permettant la création, l'accès, et la gestion d'un tableau dynamique.
+## Structure du Projet
+Le projet est organisé de la manière suivante :
+
+- **Directory:** ex02/
 - **Files to submit:**
   - `incs/Array.hpp`
   - `Makefile`
   - `srcs/Array.tpp`
   - `srcs/main.cpp`
+  
+### Description des Fichiers
 
-#### Functionality
-...
+- `incs/Array.hpp`: Contient la déclaration et la définition de la classe template Array.
+- `srcs/main.cpp`: Contient le point d'entrée du programme et la logique principale.
+- `srcs/Array.tpp`: Contient la définition de la classe template Array.
 
-## Compilation and Execution
-Navigate to the specific exercise directory and use the `make` command to compile the projects. Each executable can be run directly to demonstrate the functionalities implemented.
+- `Makefile`: Fichier pour automatiser la compilation du projet.
+
+## Compilation
+
+Pour compiler le projet, utilisez la commande suivante dans le terminal :
+
+```bash
+make
+```
+Cette commande génère un exécutable nommé array dans le répertoire courant.
+
+## Exécution
+Exécution Simple
+Après la compilation, exécutez le programme avec la commande :
+
+```bash
+./array
+```
+Cette commande permet de lancer le programme.
+
+### Exécution du Tester
+Après la compilation, exécutez le programme avec la commande et l'argument tester :
+
+```bash
+./array tester
+```
+Cette commande permet de lancer le programme en mode tester.
+
+## Fonctionnalités
+- Gestion des exceptions : Le programme démontre l'utilisation des exceptions pour gérer les erreurs de manière propre et sécurisée.
+- Suivi des bonnes pratiques de codage C++98 : Respect strict des conventions de codage et des standards de C++98.
+- Structure de code modulaire et maintenable : Le code est organisé de manière à être facilement compréhensible et extensible.
 
 ## Contributeurs
 raveriss - Développeur principal
