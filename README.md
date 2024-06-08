@@ -129,7 +129,6 @@ Le projet est organisé de la manière suivante :
 - `incs/Array.hpp`: Contient la déclaration et la définition de la classe template Array.
 - `srcs/main.cpp`: Contient le point d'entrée du programme et la logique principale.
 - `srcs/Array.tpp`: Contient la définition de la classe template Array.
-
 - `Makefile`: Fichier pour automatiser la compilation du projet.
 
 ## Compilation
